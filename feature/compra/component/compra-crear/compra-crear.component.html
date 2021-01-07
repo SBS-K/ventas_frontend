@@ -1,0 +1,86 @@
+<div class="container">
+
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div>Nueva Compra</div>
+    </h4>
+
+    <div>
+        <form [formGroup]="detalleCompraForm">
+            <div class="form-row">
+
+                <div class="form-group col-sm-5">
+                    <div class="form-label required-input">Articulo</div>
+                    <select class="custom-select " formControlName="articulo"
+                        [ngClass]="{'is-invalid': detalleCompraForm.get('articulo').invalid && detalleCompraForm.get('articulo').touched}">
+                        <option [ngValue]="null"> --Seleccione-- </option>
+                        <option [ngValue]="articuloOption" *ngFor="let articuloOption of listaArticulos">
+                            {{ articuloOption.nombre }}
+                        </option>
+                    </select>
+                    <div class="invalid-feedback font-10"
+                        *ngIf="detalleCompraForm.get('articulo').errors?.required && detalleCompraForm.get('articulo').touched">
+                        El Articulo es requerido
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <div class="form-label required-input">Cantidad</div>
+                    <input type="text" class="form-control" formControlName="cantidad" (keypress)="numberOnly($event)">
+                    <div class="invalid-feedback font-10" *ngIf="detalleCompraForm.get('cantidad').errors?.required">
+                        La Cantidad es requerida
+                    </div>
+                    <div class="invalid-feedback font-10"
+                        *ngIf="detalleCompraForm.get('cantidad').errors?.minlength && detalleCompraForm.get('cantidad').touched">
+                        Por favor ingrese algun caracter
+                    </div>
+                    <div class="invalid-feedback font-10"
+                        *ngIf="detalleCompraForm.get('cantidad').errors?.maxlength && detalleCompraForm.get('cantidad').touched">
+                        Por favor ingrese menos de 20 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-2 button-agregar">
+                    <button type="button" class="btn btn-primary btn-round d-block" (click)="agregarListaDetalle()"
+                        [disabled]="detalleCompraForm.get('articulo').value == null || detalleCompraForm.get('cantidad').value == null">
+                        <i class="fa fa-plus text-light" aria-hidden="true"></i>Agregar</button>
+                </div>
+
+            </div>
+
+        </form>
+    
+    </div>
+
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Articulo</th>
+                <th scope="col">Costo Articulo c/u</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let detalleCompra of listaDetalleCompra;  let indexDetalleCompra = index">
+              <tr>
+                <th scope="row">{{ detalleCompra.id }}</th>
+                <td>{{ detalleCompra.articulo.nombre }}</td>
+                <td>{{ detalleCompra.articulo.precio }}</td>
+                <td>{{ detalleCompra.cantidad }}</td>
+                <td>{{ detalleCompra.subtotal }}</td>
+                <td>
+                    <button (click)="eliminarListaDetalle(indexDetalleCompra)" class="btn btn-danger mx-1"><i class="fa fa-close text-light" aria-hidden="true"></i></button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="button" class="btn btn-round btn-primary" [disabled]="listaDetalleCompra.length === 0" (click)="guardarCompra()">
+        <i class="fa fa-shopping-cart text-light" aria-hidden="true"></i> Terminar Compra
+    </button>
+
+
+</div>

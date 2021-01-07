@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="align-middle mb-0">
+        Detalles de la compra
+    </h4>
+    <button type="button" class="close" (click)="modal.dismiss()">&times;</button>
+</div>
+
+<div class="modal-body">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Articulo</th>
+            <th scope="col">Costo Articulo c/u</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let detalleCompra of listaDetalleCompra">
+          <tr>
+            <th scope="row">{{ detalleCompra.id }}</th>
+            <td>{{ detalleCompra.articulo.nombre }}</td>
+            <td>{{ detalleCompra.articulo.precio }}</td>
+            <td>{{ detalleCompra.cantidad }}</td>
+            <td>{{ detalleCompra.subtotal }}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
