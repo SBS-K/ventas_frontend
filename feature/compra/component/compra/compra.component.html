@@ -4,14 +4,17 @@
         <div>Compras</div>
 
         <div class="d-flex justify-content-end align-items-center">
-          <button type="button" class="btn btn-primary btn-round d-block mx-2" (click)="redirectCrearCompra()">
+          <button id="buttonCompra" type="button" class="btn btn-primary btn-round d-block mx-2" (click)="redirectCrearCompra()">
             <span class="ion ion-md-add"></span>&nbsp;<i class="fa fa-shopping-cart text-light" aria-hidden="true"></i> Comprar</button>
         </div>
     
     </h4>
       
+    <div id="noHayCompras" *ngIf="listaCompras.length == 0">
+      <h2>No hay compras</h2>
+    </div>
     
-    <table class="table">
+    <table class="table" *ngIf="!(listaCompras.length == 0)">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
@@ -23,8 +26,8 @@
             <th scope="col">Acciones</th>
           </tr>
         </thead>
-        <tbody *ngFor="let compra of listaCompras | orderById:'id' ">
-          <tr>
+        <tbody id="listaCompras" >
+          <tr *ngFor="let compra of listaCompras | orderById:'id' ">
             <th scope="row">{{ compra.id }}</th>
             <td>{{ compra.numeroFactura }}</td>
             <td>{{ compra.costoTotal }}</td>
@@ -32,8 +35,8 @@
             <td>{{ compra.fechaCompra }}</td>
             <td>{{ compra.fechaEnvio }}</td>
             <td>
-                <button title="Ver detalles" (click)="verDetalleCompra(compra)" class="btn btn-info mx-1"><i class="fa fa-eye text-light" aria-hidden="true"></i></button>
-                <button title="Devolucion" (click)="actualizarEstadoCompra(compra)" class="btn btn-warning mx-1"><i class="fa fa-undo text-light" aria-hidden="true"></i></button>
+                <button id="buttonVerDetalle" title="Ver detalles" (click)="verDetalleCompra(compra)" class="btn btn-info mx-1"><i class="fa fa-eye text-light" aria-hidden="true"></i></button>
+                <button id="buttonActualizarEstadoCompra" title="Devolucion" (click)="actualizarEstadoCompra(compra)" class="btn btn-warning mx-1"><i class="fa fa-undo text-light" aria-hidden="true"></i></button>
             </td>
           </tr>
         </tbody>

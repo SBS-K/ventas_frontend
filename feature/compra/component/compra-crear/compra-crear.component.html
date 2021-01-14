@@ -5,12 +5,12 @@
     </h4>
 
     <div>
-        <form [formGroup]="detalleCompraForm">
+        <form id="formularioDetalleCompra" [formGroup]="detalleCompraForm">
             <div class="form-row">
 
                 <div class="form-group col-sm-5">
                     <div class="form-label required-input">Articulo</div>
-                    <select class="custom-select " formControlName="articulo"
+                    <select id="inputCantidad" class="custom-select " formControlName="articulo"
                         [ngClass]="{'is-invalid': detalleCompraForm.get('articulo').invalid && detalleCompraForm.get('articulo').touched}">
                         <option [ngValue]="null"> --Seleccione-- </option>
                         <option [ngValue]="articuloOption" *ngFor="let articuloOption of listaArticulos">
@@ -25,7 +25,7 @@
 
                 <div class="form-group col-sm-5">
                     <div class="form-label required-input">Cantidad</div>
-                    <input type="text" class="form-control" formControlName="cantidad" (keypress)="numberOnly($event)">
+                    <input id="inputCantidad" type="text" class="form-control" formControlName="cantidad" (keypress)="numberOnly($event)">
                     <div class="invalid-feedback font-10" *ngIf="detalleCompraForm.get('cantidad').errors?.required">
                         La Cantidad es requerida
                     </div>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group col-sm-2 button-agregar">
-                    <button type="button" class="btn btn-primary btn-round d-block" (click)="agregarListaDetalle()"
+                    <button id="buttonAgregarDetalleCompra" type="button" class="btn btn-primary btn-round d-block" (click)="agregarListaDetalle()"
                         [disabled]="detalleCompraForm.get('articulo').value == null || detalleCompraForm.get('cantidad').value == null">
                         <i class="fa fa-plus text-light" aria-hidden="true"></i>Agregar</button>
                 </div>
@@ -78,7 +78,7 @@
         </table>
     </div>
 
-    <button type="button" class="btn btn-round btn-primary" [disabled]="listaDetalleCompra.length === 0" (click)="guardarCompra()">
+    <button id="buttonTerminarCompra" type="button" class="btn btn-round btn-primary" [disabled]="listaDetalleCompra.length === 0" (click)="guardarCompra()">
         <i class="fa fa-shopping-cart text-light" aria-hidden="true"></i> Terminar Compra
     </button>
 

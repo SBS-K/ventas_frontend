@@ -7,6 +7,7 @@ import { CompraCrearComponent } from './component/compra-crear/compra-crear.comp
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderByIdPipe } from 'src/app/shared/pipes/orderById/order-by-id.pipe';
+import { DetalleCompraModule } from '../detalle-compra/detalle-compra.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { OrderByIdPipe } from 'src/app/shared/pipes/orderById/order-by-id.pipe';
     CommonModule,
     CompraRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DetalleCompraModule
   ],
   providers: [
     OrderByIdPipe

@@ -33,7 +33,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeModule,
     ArticuloModule,
     CompraModule,
-    DetalleCompraModule,
     NotFoundModule
   ],
   providers: [
